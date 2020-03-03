@@ -22,7 +22,7 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        $goods = Goods::orderBy('id', 'desc')->pagenate(50);
+        $goods = Goods::orderBy('id', 'desc')->paginate(50);
         return view('admin.goods.index', compact('goods'));
     }
 
@@ -45,7 +45,13 @@ class GoodsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, $this->rules);
-        Goods::create($request->all());
+        $path = $request->file('image')->store('public/img');
+        Goods::create([
+            'title' => $request->get('title'),
+            'image' => basename($path),
+            'price' => $request->get('price'),
+            'description' => $request->get('description')
+        ]);
         \Session::flash('flash_message', '商品を追加しました。');
         return redirect('admin/goods');
     }
@@ -58,8 +64,8 @@ class GoodsController extends Controller
      */
     public function show($id)
     {
-        $goods = Goods::findOrFail($id);
-        return view('admin.goods.show', compact($goods));
+        $item = Goods::findOrFail($id);
+        return view('admin.goods.show', compact('item'));
     }
 
     /**
@@ -70,8 +76,8 @@ class GoodsController extends Controller
      */
     public function edit($id)
     {
-        $goods = Goods::findOrFail($id);
-        return view('admin.goods.edit', compact($goods));
+        $item = Goods::findOrFail($id);
+        return view('admin.goods.edit', compact('item'));
     }
 
     /**
@@ -84,8 +90,14 @@ class GoodsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, $this->rules);
+        $path = $request->file('image')->store('public/img');
         $goods = Goods::findOrFail($id);
-        $goods->update($request->all());
+        $goods->update([
+            'title' => $request->get('title'),
+            'image' => basename($path),
+            'price' => $request->get('price'),
+            'description' => $request->get('description')
+        ]);
 
         \Session::flash('flash_message', '商品を更新しました。');
         return redirect('admin/goods');

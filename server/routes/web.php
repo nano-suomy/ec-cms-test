@@ -15,6 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/**
+ * register
+ */
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+/**
+ * EC-CMS
+ */
+Route::group([
+    'prefix' => 'admin',
+    'middleware' => 'auth'], function() {
+        Route::resource('goods', 'Admin\GoodsController');
+});
