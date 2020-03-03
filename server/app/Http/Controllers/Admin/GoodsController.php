@@ -8,9 +8,15 @@ use App\Goods;
 
 class GoodsController extends Controller
 {
-    public $rules = [
+    public $createRules = [
         'title' => 'required',
         'image' => 'required',
+        'price' => 'required',
+        'description' => 'max:500'
+    ];
+
+    public $updateRules = [
+        'title' => 'required',
         'price' => 'required',
         'description' => 'max:500'
     ];
@@ -44,7 +50,7 @@ class GoodsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules);
+        $this->validate($request, $this->createRules);
         $path = $request->file('image')->store('public/img');
         Goods::create([
             'title' => $request->get('title'),
@@ -89,15 +95,23 @@ class GoodsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->rules);
-        $path = $request->file('image')->store('public/img');
+        $this->validate($request, $this->updateRules);
+        $path = !!$request->file('image') ? $request->file('image')->store('public/img') : null;
         $goods = Goods::findOrFail($id);
-        $goods->update([
-            'title' => $request->get('title'),
-            'image' => basename($path),
-            'price' => $request->get('price'),
-            'description' => $request->get('description')
-        ]);
+        if(isset($path)){
+            $goods->update([
+                'title' => $request->get('title'),
+                'image' => basename($path),
+                'price' => $request->get('price'),
+                'description' => $request->get('description')
+            ]);
+        }else{
+            $goods->update([
+                'title' => $request->get('title'),
+                'price' => $request->get('price'),
+                'description' => $request->get('description')
+            ]);
+        }
 
         \Session::flash('flash_message', '商品を更新しました。');
         return redirect('admin/goods');
