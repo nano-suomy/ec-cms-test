@@ -5,13 +5,24 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">記事詳細</div>
+                <div class="panel-heading">
+                    <h1 class="item-head">{{$item->title}}</h1>
+                </div>
                 <div class="panel-body">
-                    <div>
-                        <h1>{{$item->title}}</h1>
-                        <img src="{{ asset('/storage/img/'.$item->image) }}">
-                        <p>{{$item->price}}</p>
-                        <p>{{$item->description}}</p>
+                    <div class="item-container">
+                        <div class="img-container">
+                            <img class="item-img" alt="item" src="{{ asset('/storage/img/'.$item->image) }}">
+                        </div>
+                        <div class="detail-container">
+                            <div class="item-price">
+                                <h2>価格:</h2>
+                                <p>{{$item->price}}円</p>
+                            </div>
+                            <div class="item-body">
+                                <h2>詳細</h2>
+                                <p>{{$item->description}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

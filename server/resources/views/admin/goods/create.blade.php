@@ -5,9 +5,10 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">新規作成</div>
+                <div class="panel-heading">
+                    <h1>新規作成</h1>
+                </div>
                 <div class="panel-body">
-
                     {{-- エラーの表示 --}}
                     @if ($errors->any())
                         <div class="alert alert-danger">

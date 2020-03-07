@@ -6,7 +6,9 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">編集</div>
+                <div class="panel-heading">
+                    <h1>編集</h1>
+                </div>
                 <div class="panel-body">
 
                     {{-- エラーの表示 --}}

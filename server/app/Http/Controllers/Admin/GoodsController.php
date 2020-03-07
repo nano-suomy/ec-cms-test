@@ -28,7 +28,7 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        $goods = Goods::orderBy('id', 'desc')->paginate(50);
+        $goods = Goods::orderBy('id', 'desc')->paginate(20);
         return view('admin.goods.index', compact('goods'));
     }
 
