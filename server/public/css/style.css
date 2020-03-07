@@ -48,10 +48,6 @@
     margin: 0;
 }
 
-.goods-body p:nth-of-type(4) {
-    align-self: flex-end;
-}
-
 .goods-body p a {
     color: #333333;
     font-size: 32px;
