@@ -12,9 +12,27 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
+/**
+ * register
+ */
 Auth::routes();
+//Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/home', 'HomeController@index')->name('home');
+/**
+ * EC
+ */
+Route::resource('goods', 'GoodsController', ['only' => [
+    'index', 'show'
+]]);
+
+/**
+ * EC-CMS
+ */
+Route::group([
+    'prefix' => 'admin',
+    'middleware' => 'auth'], function() {
+        Route::resource('goods', 'Admin\GoodsController');
+});
