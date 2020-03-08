@@ -9,6 +9,12 @@
                         <h1>商品一覧</h1>
                     </div>
                     <div class="panel-body">
+                        <div>
+                            <form class="form-inline" action="{{ url('/goods') }}">
+                                <input type="text" name="keyword" value="{{ $keyword }}" size="50" class="form-control" placeholder="検索">
+                                <input type="submit" value="検索" class="btn btn-info">
+                            </form>
+                        </div>
                         <div class="goods">
                             @foreach($goods as $item)
                                 <div class="goods-container">
