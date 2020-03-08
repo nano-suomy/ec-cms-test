@@ -4,7 +4,8 @@
 ・recommended: macOS
 ```
 
-#install
+## install
+
 ・replace the filename of `.env.example` with `.env`<br>
 ・then, execute command shown below in terminal
 
@@ -16,7 +17,8 @@
 > php artisan storage:link
 ```
 
-#run
+## run
+
 ・@localhost:8080
 
 ```
